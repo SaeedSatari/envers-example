@@ -1,5 +1,6 @@
 package ir.ssatari.envers.mapper;
 
+import ir.ssatari.envers.controller.request.CustomerRequest;
 import ir.ssatari.envers.controller.response.CustomerResponse;
 import ir.ssatari.envers.dal.entity.CustomerEntity;
 import org.mapstruct.Mapper;
@@ -13,4 +14,8 @@ public interface CustomerMapper {
     @Mapping(target = "firstName", source = "source.firstName")
     @Mapping(target = "lastName", source = "source.lastName")
     CustomerResponse customerEntityToCustomerResponse(CustomerEntity source);
+
+    @Mapping(target = "firstName", source = "source.firstName")
+    @Mapping(target = "lastName", source = "lastName")
+    CustomerEntity customerRequestToCustomerEntity(CustomerRequest source);
 }
