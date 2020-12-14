@@ -53,7 +53,7 @@ public class CustomerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerResponse saveNewCustomer(@RequestBody CustomerRequest customerRequest) {
-        log.info("going to save a new customer with given request {}", customerRequest);
+        log.info("going to save a new customer with given request {}", customerRequest.toString());
         CustomerEntity customerEntity = customerService.saveNewCustomer(CustomerMapper.MAPPER.customerRequestToCustomerEntity(customerRequest));
         return CustomerMapper.MAPPER.customerEntityToCustomerResponse(customerEntity);
     }
@@ -71,6 +71,7 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.OK)
     public CustomerHistoryResponseList getHistory(@PathVariable String id) {
         CustomerHistoryResponseList responseList = new CustomerHistoryResponseList();
+        log.info("going to get history of given customer by customer-id {}", id);
         List<CustomerHistoryEntity> histories = customerHistoryService.getHistory(id);
         responseList.setCustomerHistoryResponses(histories.stream().map(CustomerMapper.MAPPER::customerHistoryEntityToCustomerHistoryResponse).collect(Collectors.toList()));
         return responseList;
