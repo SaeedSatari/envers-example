@@ -2,10 +2,13 @@ package ir.ssatari.envers.controller;
 
 import io.swagger.annotations.ApiOperation;
 import ir.ssatari.envers.controller.request.CustomerRequest;
+import ir.ssatari.envers.controller.response.CustomerHistoryResponseList;
 import ir.ssatari.envers.controller.response.CustomerResponse;
 import ir.ssatari.envers.controller.response.CustomerResponseList;
 import ir.ssatari.envers.dal.entity.CustomerEntity;
+import ir.ssatari.envers.dal.entity.CustomerHistoryEntity;
 import ir.ssatari.envers.mapper.CustomerMapper;
+import ir.ssatari.envers.service.CustomerHistoryService;
 import ir.ssatari.envers.service.CustomerService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +27,7 @@ import java.util.stream.Collectors;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final CustomerHistoryService customerHistoryService;
 
     @ApiOperation(value = "get list of existing customers", nickname = "get-customer-list")
     @GetMapping
@@ -55,11 +59,20 @@ public class CustomerController {
     }
 
     @ApiOperation(value = "delete customer using given id", nickname = "delete-customer")
-    @DeleteMapping("/id")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteCustomer(@PathParam("id") String id) {
+    @DeleteMapping(path = "/{id}")
+    public void deleteCustomer(@PathVariable("id") String id) {
         log.info("going to delete customer with given id {}", id);
         customerService.deleteCustomer(id);
         log.info("deleting customer with given id finished successfully {}", id);
+    }
+
+    @ApiOperation(value = "get customer history using given id", nickname = "get-customer-history")
+    @GetMapping(path = "history/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public CustomerHistoryResponseList getHistory(@PathVariable String id) {
+        CustomerHistoryResponseList responseList = new CustomerHistoryResponseList();
+        List<CustomerHistoryEntity> histories = customerHistoryService.getHistory(id);
+        responseList.setCustomerHistoryResponses(histories.stream().map(CustomerMapper.MAPPER::customerHistoryEntityToCustomerHistoryResponse).collect(Collectors.toList()));
+        return responseList;
     }
 }

@@ -1,34 +1,40 @@
-CREATE TABLE `customers`
+create table customers
 (
-    `id`               BIGINT       NOT NULL AUTO_INCREMENT,
-    `first_name`       VARCHAR(255) NOT NULL,
-    `last_name`        VARCHAR(255) NOT NULL,
-    `created_by`       VARCHAR(255) NULL,
-    `created_at`       TIMESTAMP    NULL,
-    `last_modified_by` VARCHAR(255) NULL,
-    `last_modified_at` TIMESTAMP    NULL,
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
-);
+    customer_id      bigint not null auto_increment,
+    first_name       varchar(255),
+    last_name        varchar(255),
+    created_by       varchar(255),
+    created_at       datetime(6),
+    last_modified_by varchar(255),
+    last_modified_at datetime(6),
+    primary key (customer_id)
+) engine = InnoDB;
 
-CREATE TABLE `customers_history`
+create table customers_aud
 (
-    `id`               BIGINT       NOT NULL AUTO_INCREMENT,
-    `first_name`       VARCHAR(255) NOT NULL,
-    `last_name`        VARCHAR(255) NOT NULL,
-    `created_by`       VARCHAR(255) NULL,
-    `created_at`       TIMESTAMP    NULL,
-    `last_modified_by` VARCHAR(255) NULL,
-    `last_modified_at` TIMESTAMP    NULL,
-    `revision`         integer      NOT NULL,
-    `revision_type`    smallint,
-    PRIMARY KEY (`id`),
-    UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
-);
+    customer_id      bigint  not null,
+    first_name       varchar(255),
+    last_name        varchar(255),
+    created_by       varchar(255),
+    created_at       datetime(6),
+    last_modified_by varchar(255),
+    last_modified_at datetime(6),
+    rev              integer not null,
+    revtype          tinyint,
+    primary key (customer_id, rev)
+) engine = InnoDB;
 
-CREATE TABLE `revision_infos`
+create table hibernate_sequence
 (
-    `revision_number`    INT    NOT NULL,
-    `revision_timestamp` BIGINT NULL,
-    PRIMARY KEY (`revision_number`)
-);
+    next_val bigint
+) engine = InnoDB;
+
+insert into hibernate_sequence
+values (1);
+
+create table revinfo
+(
+    revision_number    integer not null,
+    revision_timestamp bigint,
+    primary key (revision_number)
+) engine = InnoDB;
