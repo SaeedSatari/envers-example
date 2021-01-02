@@ -41,9 +41,9 @@ public class CustomerController {
     }
 
     @ApiOperation(value = "get customer using given id", nickname = "get-customer")
-    @GetMapping(path = "/id")
+    @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CustomerResponse getCustomer(@PathParam("id") String id) {
+    public CustomerResponse getCustomer(@PathVariable("id") String id) {
         log.info("going to get customer with given id {}", id);
         CustomerEntity customer = customerService.getCustomer(id);
         return CustomerMapper.MAPPER.customerEntityToCustomerResponse(customer);
