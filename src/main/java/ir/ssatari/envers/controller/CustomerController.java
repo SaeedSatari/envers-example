@@ -67,7 +67,7 @@ public class CustomerController {
     }
 
     @ApiOperation(value = "get customer history using given id", nickname = "get-customer-history")
-    @GetMapping(path = "history/{id}")
+    @GetMapping(path = "/history/{id}")
     @ResponseStatus(HttpStatus.OK)
     public CustomerHistoryResponseList getHistory(@PathVariable String id) {
         CustomerHistoryResponseList responseList = new CustomerHistoryResponseList();
