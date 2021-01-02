@@ -19,7 +19,12 @@
         <org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
         <springdoc-openapi-ui.version>1.5.1</springdoc-openapi-ui.version>
         <springfox.version>3.0.0</springfox.version>
+        <hibernate-envers.version>5.4.25.Final</hibernate-envers.version>
+        <hibernate-validator.version>6.1.6.Final</hibernate-validator.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
+        <swagger-annotations.version>1.5.20</swagger-annotations.version>
         <plugin.prettier.goal>write</plugin.prettier.goal>
+        <docker-maven-plugin.version>1.2.2</docker-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -45,23 +50,20 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-envers -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
-            <version>5.4.25.Final</version>
+            <version>${hibernate-envers.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
+            <version>${validation-api.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.1.6.Final</version>
+            <version>${hibernate-validator.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -73,7 +75,6 @@
             <artifactId>mapstruct-processor</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
@@ -92,7 +93,7 @@
         <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>1.5.20</version>
+            <version>${swagger-annotations.version}</version>
         </dependency>
     </dependencies>
 
@@ -118,9 +119,6 @@
                     <printWidth>120</printWidth>
                     <tabWidth>4</tabWidth>
                     <useTabs>true</useTabs>
-                    <trailingComma>none</trailingComma>
-                    <singleQuote>false</singleQuote>
-                    <arrowParens>avoid</arrowParens>
                     <ignoreConfigFile>true</ignoreConfigFile>
                     <ignoreEditorConfig>true</ignoreEditorConfig>
                 </configuration>
@@ -133,7 +131,32 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker-maven-plugin.version}</version>
+                <configuration>
+                    <imageName>envers-example</imageName>
+                    <baseImage>java</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <!-- copy the service's jar file from target into the root directory of the image -->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <developers>
+        <developer>
+            <name>Saeed Sattari</name>
+            <email>saeedsatari93@gmail.com</email>
+        </developer>
+    </developers>
 
 </project>
