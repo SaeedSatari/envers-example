@@ -8,8 +8,7 @@ import org.hibernate.envers.RevisionType;
 @Getter
 @AllArgsConstructor
 public class AuditQueryResult<T> {
-
-    private final T entity;
-    private final CustomRevisionEntity revision;
-    private final RevisionType type;
+	private final T entity;
+	private final CustomRevisionEntity revision;
+	private final RevisionType type;
 }

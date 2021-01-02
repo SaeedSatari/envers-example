@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 public class CustomerResponse {
-    @ApiModelProperty(example = "Saeed")
-    private String firstName;
-    @ApiModelProperty(example = "Sattari")
-    private String lastName;
+	@ApiModelProperty(example = "Saeed")
+	private String firstName;
+
+	@ApiModelProperty(example = "Sattari")
+	private String lastName;
 }

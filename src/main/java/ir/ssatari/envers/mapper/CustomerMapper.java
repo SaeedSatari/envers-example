@@ -11,18 +11,18 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
-    CustomerMapper MAPPER = Mappers.getMapper(CustomerMapper.class);
+	CustomerMapper MAPPER = Mappers.getMapper(CustomerMapper.class);
 
-    @Mapping(target = "firstName", source = "source.firstName")
-    @Mapping(target = "lastName", source = "source.lastName")
-    CustomerResponse customerEntityToCustomerResponse(CustomerEntity source);
+	@Mapping(target = "firstName", source = "source.firstName")
+	@Mapping(target = "lastName", source = "source.lastName")
+	CustomerResponse customerEntityToCustomerResponse(CustomerEntity source);
 
-    @Mapping(target = "firstName", source = "source.firstName")
-    @Mapping(target = "lastName", source = "lastName")
-    CustomerEntity customerRequestToCustomerEntity(CustomerRequest source);
+	@Mapping(target = "firstName", source = "source.firstName")
+	@Mapping(target = "lastName", source = "lastName")
+	CustomerEntity customerRequestToCustomerEntity(CustomerRequest source);
 
-    @Mapping(target = "customer",source = "source.customer")
-    @Mapping(target = "revision",source = "revision")
-    @Mapping(target = "type",source = "revisionType")
-    CustomerHistoryResponse customerHistoryEntityToCustomerHistoryResponse(CustomerHistoryEntity source);
+	@Mapping(target = "customer", source = "source.customer")
+	@Mapping(target = "revision", source = "revision")
+	@Mapping(target = "type", source = "revisionType")
+	CustomerHistoryResponse customerHistoryEntityToCustomerHistoryResponse(CustomerHistoryEntity source);
 }

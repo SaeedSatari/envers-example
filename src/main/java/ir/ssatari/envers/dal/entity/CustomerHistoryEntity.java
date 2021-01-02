@@ -7,8 +7,7 @@ import org.hibernate.envers.RevisionType;
 @AllArgsConstructor
 @Getter
 public class CustomerHistoryEntity {
-
-    private final CustomerEntity customer;
-    private final Number revision;
-    private final RevisionType revisionType;
+	private final CustomerEntity customer;
+	private final Number revision;
+	private final RevisionType revisionType;
 }

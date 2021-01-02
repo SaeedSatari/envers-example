@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class EnversExampleApplication {
-    public static void main(String[] args) {
-        SpringApplication.run(EnversExampleApplication.class, args);
-    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(EnversExampleApplication.class, args);
+	}
 }
