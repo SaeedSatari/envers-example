@@ -1,7 +1,6 @@
 package ir.ssatari.envers;
 
 import ir.ssatari.envers.controller.response.CustomerResponse;
-import ir.ssatari.envers.controller.response.CustomerResponseList;
 import ir.ssatari.envers.dal.entity.CustomerEntity;
 import java.util.Collections;
 import java.util.Date;
