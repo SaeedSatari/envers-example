@@ -81,4 +81,4 @@ To push the image you just built to the registry, specify the pushImage flag.
 ```
 
 I hope this example helps developers who want to learn more about Hibernate Envers and Spring Boot integrity.
-If you have any questions, please feel free to reach me by emai: saeedsatari93@gmail.com 
+If you have any questions, please feel free to reach me by email: saeedsatari93@gmail.com 
