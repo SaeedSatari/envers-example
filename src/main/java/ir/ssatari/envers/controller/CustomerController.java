@@ -12,7 +12,6 @@ import ir.ssatari.envers.service.CustomerHistoryService;
 import ir.ssatari.envers.service.CustomerService;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
