@@ -28,6 +28,7 @@ The AuditReader API provides numerous ways to query for entities at particular r
 - MySQL as our Database
 
 ### Tools:
+- IntelliJ IDEA
 - Mapstruct for implementation of mappings between Java bean types
 - Open Api and Swagger for describing RESTful APIs expressed
 - Flyway as our database-migration tool
